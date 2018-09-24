@@ -6,7 +6,7 @@ const device_id = '8xxxxxxxxxxxxxxxxxxxxxx';
 const options = {
   headers: {
     // needs node.js version >= 5.10.0 for this to work as Buffer.from() is added at that milestone!
-    'Authorization': Buffer.from('apikey:' + token).toString('base64');
+    'Authorization': Buffer.from('apikey:' + token).toString('base64')
   }
 }
 
