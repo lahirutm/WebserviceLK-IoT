@@ -5,7 +5,7 @@ const token = "Your api key from webservice.lk";
 
 const options = {
     headers: {
-        "Authorization" : Buffer.from("apikey:" + token).toString('base64');
+        "Authorization" : Buffer.from("apikey:" + token).toString('base64')
     }
 };
 
