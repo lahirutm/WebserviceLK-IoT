@@ -124,7 +124,7 @@ void setup() {
   }
 
   // server address, port and URL
-  webSocket.begin("webservice.lk", 8080, "/");
+  webSocket.begin("iot.webservice.lk", 8080, "/");
 
   // event handler
   webSocket.onEvent(webSocketEvent);
