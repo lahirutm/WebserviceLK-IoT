@@ -1,7 +1,7 @@
 // Get help from Kakopappa's Sinric repository
 
 const WebSocket = require('ws');
-const token = "Your api key from webservice.lk";
+const token = "Your api key from iot.webservice.lk";
 
 const options = {
     headers: {
@@ -9,10 +9,10 @@ const options = {
     }
 };
 
-const ws = new WebSocket('ws://webservice.lk:8080', options);
+const ws = new WebSocket('ws://iot.webservice.lk:8080', options);
  
 ws.on('open', function open() {
-   console.log("Connected with WebserviceLK. waiting for commands..");
+   console.log("Connected with iot.WebserviceLK. waiting for commands..");
 });
 
 ws.on('message', function incoming(data) {
