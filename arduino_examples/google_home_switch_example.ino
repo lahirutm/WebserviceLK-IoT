@@ -62,12 +62,12 @@ void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
   switch(type) {
     case WStype_DISCONNECTED:
       isConnected = false;    
-      Serial.printf("Disconnected from webservice.lk !\n");
+      Serial.printf("Disconnected from iot.webservice.lk !\n");
       break;
     case WStype_CONNECTED: {
       isConnected = true;
-      Serial.printf("Connected to webservice.lk at url: %s\n", payload);
-      Serial.printf("Waiting for commands from webservice.lk ...\n");        
+      Serial.printf("Connected to iot.webservice.lk at url: %s\n", payload);
+      Serial.printf("Waiting for commands from iot.webservice.lk ...\n");        
       }
       break;
     case WStype_TEXT: {
@@ -93,7 +93,7 @@ void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
             }
         }
         else if (action == "test") {
-            Serial.println("Received test command from webservice.lk");
+            Serial.println("Received test command from iot.webservice.lk");
         }
       }
       break;
