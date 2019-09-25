@@ -42,5 +42,5 @@ Now you can programme your NodeMCU or Arduino & etc to connect with webservice.l
 
 For more information visit https://webservice.lk/how_to
 
-Kakopappa (Aruna Tennakoon) has done nice work for connecting your esp-module/arduino to sinric.com with Google Asistance & Amazon Alexa for free.
+Got basic idea & coding guidence from Kakopappa (Aruna Tennakoon), he has done nice work for connecting your esp-module/arduino to sinric.com with Google Asistance & Amazon Alexa for free.
 https://github.com/kakopappa/sinric
