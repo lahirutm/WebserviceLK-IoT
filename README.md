@@ -42,5 +42,6 @@ Now you can programme your NodeMCU or Arduino & etc to connect with webservice.l
 
 For more information visit https://webservice.lk/how_to
 
-Got basic idea & coding guidence from Kakopappa (Aruna Tennakoon), he has done nice work for connecting your esp-module/arduino to sinric.com with Google Asistance & Amazon Alexa for free.
-https://github.com/kakopappa/sinric
+Smart Switch using NodeMCU - Works with Google Home Assistant 
+https://blogs.webservice.lk/2020/08/30/smart-switch-using-nodemcu-works-with-google-home-assistant/
+
