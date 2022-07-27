@@ -1,4 +1,4 @@
-// Get help from Kakopappa's Sinric repository
+// Got help from Kakopappa's Sinric repository
 
 const WebSocket = require('ws');
 const token = 'Your api key from iot.webservice.lk';
