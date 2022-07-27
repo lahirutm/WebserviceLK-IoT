@@ -14,6 +14,7 @@ WiFiClient client;
 #define EEPROM_SIZE 1
 
 #define MyApiKey "46164c312e3f82779868e2bfbee5e2c2" // TODO: Change to your webservice.lk API Key.
+#define MyDeviceId "46164c312e3f82779868e2bfbee5e2c2" // TODO: Change to your webservice.lk API Key.
 #define MySSID "SLT" // TODO: Change to your Wifi network SSID
 #define MyWifiPassword "19880630" // TODO: Change to your Wifi network password
 
@@ -26,7 +27,7 @@ bool isConnected = false;
 
  
 void turnOn(String deviceId) {
-  if (deviceId == "c81e728d9d4c2f636f067f89cc14862c") // Device ID of first device
+  if (deviceId == MyDeviceId) // Device ID of first device
   {  
     Serial.print("Turn on device id: ");
     Serial.println(deviceId);
@@ -42,7 +43,7 @@ void turnOn(String deviceId) {
 }
 
 void turnOff(String deviceId) {
-   if (deviceId == "c81e728d9d4c2f636f067f89cc14862c") // Device ID of first device
+   if (deviceId == MyDeviceId) // Device ID of first device
    {  
      Serial.print("Turn off Device ID: ");
      Serial.println(deviceId);
@@ -139,7 +140,7 @@ void setup() {
 
   // event handler
   webSocket.onEvent(webSocketEvent);
-  webSocket.setAuthorization("apikey", MyApiKey);
+  webSocket.setAuthorization(MyApiKey, MyDeviceId);
   
   // try again every 5000ms if connection has failed
   // If you see 'class WebSocketsClient' has no member named 'setReconnectInterval' error update arduinoWebSockets
