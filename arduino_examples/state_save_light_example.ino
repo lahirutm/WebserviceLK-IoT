@@ -140,7 +140,7 @@ void setup() {
 
   // event handler
   webSocket.onEvent(webSocketEvent);
-  webSocket.setAuthorization(MyApiKey, MyDeviceId);
+  webSocket.setAuthorization('"'+MyApiKey+'"', MyDeviceId);
   
   // try again every 5000ms if connection has failed
   // If you see 'class WebSocketsClient' has no member named 'setReconnectInterval' error update arduinoWebSockets
