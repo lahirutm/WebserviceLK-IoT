@@ -13,12 +13,12 @@ WiFiClient client;
 // define the number of bytes you want to access
 #define EEPROM_SIZE 1
 
-#define MyApiKey "46164c312e3f82779868e2bfbee5e2c2" // TODO: Change to your webservice.lk API Key.
-#define MyDeviceId "46164c312e3f82779868e2bfbee5e2c2" // TODO: Change to your webservice.lk API Key.
-#define MySSID "SLT" // TODO: Change to your Wifi network SSID
-#define MyWifiPassword "19880630" // TODO: Change to your Wifi network password
+#define MyApiKey "api_key_from_webservice_lk"
+#define MyDeviceId "device_id_from_webservice_lk"
+#define MySSID "your_wifi_ssid"
+#define MyWifiPassword "your_wifi_password"
 
-#define HEARTBEAT_INTERVAL 300000 // 5 Minutes 
+#define HEARTBEAT_INTERVAL 60000 // 1 Minutes 
 
 #define out1 D0
 
