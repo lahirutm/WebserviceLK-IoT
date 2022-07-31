@@ -20,7 +20,7 @@ WiFiClient client;
 
 #define HEARTBEAT_INTERVAL 60000 // 1 Minutes 
 
-#define out1 D0
+#define out1 D1
 
 uint64_t heartbeatTimestamp = 0;
 bool isConnected = false;
