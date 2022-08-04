@@ -13,16 +13,13 @@ WiFiClient client;
 // define the number of bytes you want to access
 #define EEPROM_SIZE 1
 
-#define MyApiKey "api_key_from_webservice_lk"
-#define MyDeviceId "device_id_from_webservice_lk"
-#define MySSID "your_wifi_ssid"
-#define MyWifiPassword "your_wifi_password"
+#define MyApiKey "Your_API_KEY" // TODO: Change to your webservice.lk API Key.
+#define MyDeviceId "Your_Device_ID" // TODO: Change to your webservice.lk API Key.
+#define MySSID "Your_WiFi_SSID" // TODO: Change to your Wifi network SSID
+#define MyWifiPassword "Your_WiFi_Password" // TODO: Change to your Wifi network password
 
-#define HEARTBEAT_INTERVAL 60000 // 1 Minutes 
+#define out1 D0
 
-#define out1 D1
-
-uint64_t heartbeatTimestamp = 0;
 bool isConnected = false;
 
  
@@ -59,6 +56,7 @@ void turnOff(String deviceId) {
 }
 
 void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
+    
   switch(type) {
     case WStype_DISCONNECTED:
       isConnected = false;    
@@ -71,34 +69,50 @@ void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
       }
       break;
     case WStype_TEXT: {
-        Serial.printf("Get text: %s\n", payload);
+        Serial.printf("%s \n",payload);
         // For Switch  types
-  // https://developers.google.com/actions/smarthome/traits/onoff
+        // https://developers.google.com/actions/smarthome/traits/onoff
         // {"deviceId":"xxx","action":"action.devices.commands.OnOff","value":{"on":true}} 
         // {"deviceId":"xxx","action":"action.devices.commands.OnOff","value":{"on":false}}
 
-        DynamicJsonBuffer jsonBuffer;
-        JsonObject& json = jsonBuffer.parseObject((char*)payload); 
-        String deviceId = json ["deviceId"];     
-        String action = json ["action"];
-        
-        if(action == "setPowerState") { // For Switch 
-            String value = json ["value"];
+        const uint8_t size = JSON_OBJECT_SIZE(10);
+        StaticJsonDocument<size> json;
+        DeserializationError err = deserializeJson(json, payload);
+        if (err) {
+            Serial.print(F("deserializeJson() failed with code "));
+            Serial.println(err.c_str());
+            return;
+        }
+
+        const char *action = json["action"];
+        const char *deviceId = json ["deviceId"];   
+        if (strcmp(action, "setPowerState") == 0) {
+            
+            const char *value = json ["value"];
             Serial.println(value); 
             
-            if(value == "ON") {
+            if(strcmp(value, "ON") == 0) {
                 turnOn(deviceId);
             } else {
                 turnOff(deviceId);
             }
         }
-        else if (action == "test") {
+        else if (strcmp(action, "test") == 0) {
             Serial.println("Received test command from iot.webservice.lk");
         }
       }
       break;
     case WStype_BIN:
       Serial.printf("Get binary length: %u\n", length);
+      break;
+    case WStype_PING:
+      Serial.printf("WStype_PING sent\n");
+      break;    
+    case WStype_PONG:
+      Serial.printf("WStype_PONG received\n");
+      break;
+    default:
+      Serial.printf("Get default payload: %s\n", payload);
       break;
   }
 }
@@ -144,19 +158,11 @@ void setup() {
   
   // try again every 5000ms if connection has failed
   // If you see 'class WebSocketsClient' has no member named 'setReconnectInterval' error update arduinoWebSockets
-  webSocket.setReconnectInterval(5000);   
+  webSocket.setReconnectInterval(5000);
+
+  webSocket.enableHeartbeat(15000, 3000, 2);
 }
 
 void loop() {
-  webSocket.loop();
-  
-  if(isConnected) {
-      uint64_t now = millis();
-      
-      // Send heartbeat in order to avoid disconnections
-      if((now - heartbeatTimestamp) > HEARTBEAT_INTERVAL) {
-          heartbeatTimestamp = now;
-          webSocket.sendTXT("H");          
-      }
-  }   
+  webSocket.loop();  
 }
